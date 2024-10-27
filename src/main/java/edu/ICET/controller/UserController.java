@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/User")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping("add-user")
     public boolean addUser(@Valid @RequestBody User user){
