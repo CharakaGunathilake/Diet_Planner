@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.DietProgress;
 import edu.ICET.dto.Login;
 import edu.ICET.entity.DietProgressEntity;
-import edu.ICET.entity.LoginEntity;
 import edu.ICET.repository.DietProgressDao;
 import edu.ICET.service.custom.DietProgressService;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +31,10 @@ public class DietProgressServiceImpl implements DietProgressService {
     }
 
     @Override
-    public boolean update(DietProgress dietProgress) {
+    public boolean update(DietProgress newDietProgress) {
+        DietProgress dietProgress = search(newDietProgress.getId()) != null ? newDietProgress : null;
         dietProgressDao.save(objectMapper.convertValue(dietProgress, DietProgressEntity.class));
-        return false;
+        return dietProgress.equals(newDietProgress);
     }
 
     @Override

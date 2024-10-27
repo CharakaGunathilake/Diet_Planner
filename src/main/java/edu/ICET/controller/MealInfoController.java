@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/Meal")
+@RequestMapping("/meal-info")
 public class MealInfoController {
 
     private final MealInfoService mealInfoService;
@@ -37,7 +37,7 @@ public class MealInfoController {
 
     @PutMapping("/update-meal-info")
     public boolean updateMealInfo(@Valid @RequestBody MealInfo mealInfo){
-        log.info("Updated MealInfo as-> {}", mealInfo);
+        log.info("Updated MealInfo by the Id= {} as: {}", mealInfo.getId(), mealInfo);
         return mealInfoService.update(mealInfo);
     }
 

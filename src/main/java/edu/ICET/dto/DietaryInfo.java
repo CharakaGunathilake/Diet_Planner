@@ -24,8 +24,8 @@ public class DietaryInfo {
     @NotNull
     private String goals;
     @NotNull
-    @Min(value = 1, message = "Invalid weight")
-    @Max(value = 20, message = "Invalid weight")
+    @Min(value = 10, message = "Invalid weight")
+    @Max(value = 200, message = "Invalid weight")
     private Double targetWeight;
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -39,6 +39,6 @@ public class DietaryInfo {
     @NotNull
     private Integer caloriesDeficit;
     @NotNull
-    @Pattern(regexp = "^(Overweight|Normal|Underweight)$\n")
+    @Pattern(regexp = "^(Overweight|Normal|Underweight)$")
     private String bmiStatus;
 }

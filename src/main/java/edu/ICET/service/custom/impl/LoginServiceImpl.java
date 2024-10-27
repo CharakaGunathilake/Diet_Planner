@@ -1,17 +1,21 @@
 package edu.ICET.service.custom.impl;
 
+import ch.qos.logback.core.util.COWArrayList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.Login;
 import edu.ICET.dto.User;
 import edu.ICET.entity.LoginEntity;
+import edu.ICET.entity.MealInfoEntity;
 import edu.ICET.repository.LoginDao;
 import edu.ICET.service.custom.LoginService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
@@ -31,10 +35,12 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public boolean update(Login login) {
+    public boolean update(Login newLogin) {
+        Login login = search(newLogin.getId()) != null ? newLogin : null;
         loginDao.save(objectMapper.convertValue(login, LoginEntity.class));
-        return false;
+        return login.equals(newLogin);
     }
+
 
     @Override
     public boolean delete(Long id) {

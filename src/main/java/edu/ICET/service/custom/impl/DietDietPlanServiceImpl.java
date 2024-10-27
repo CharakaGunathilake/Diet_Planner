@@ -6,11 +6,13 @@ import edu.ICET.entity.DietPlanEntity;
 import edu.ICET.repository.DietPlanDao;
 import edu.ICET.service.custom.DietPlanService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class DietDietPlanServiceImpl implements DietPlanService {
@@ -30,9 +32,10 @@ public class DietDietPlanServiceImpl implements DietPlanService {
     }
 
     @Override
-    public boolean update(DietPlan dietPlan) {
+    public boolean update(DietPlan newdietPlan) {
+        DietPlan dietPlan = search(newdietPlan.getId()) != null ? newdietPlan : null;
         dietPlanDao.save(objectMapper.convertValue(dietPlan, DietPlanEntity.class));
-        return false;
+        return dietPlan.equals(newdietPlan);
     }
 
     @Override

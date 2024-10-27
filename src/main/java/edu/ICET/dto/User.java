@@ -41,7 +41,7 @@ public class User {
     private String email;
     @NotNull
     @Pattern(regexp = "^(true|false)$", message = "Status must be either 'true' or 'false'")
-    private boolean status;
+    private String status;
     @NotNull
     private Date regDate;
 }

@@ -18,31 +18,31 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/User")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
 
     @PostMapping("add-user")
-    public boolean addUser(@Valid @RequestBody User user){
+    public boolean addUser(@Valid @RequestBody User user) {
         log.info("Received User-> {}", user);
         return userService.save(user);
     }
 
     @GetMapping("/get-user-byId/{id}")
-    public User getUserById(@PathVariable Long id){
+    public User getUserById(@PathVariable Long id) {
         log.info("Requested User by the Id-> {}", id);
         return userService.search(id);
     }
 
-    @PutMapping("/update-diet-plan")
-    public boolean updateUser(@Valid @RequestBody User user){
-        log.info("Updated User as-> {}", user);
+    @PutMapping("/update-user-info")
+    public boolean updateUser(@Valid @RequestBody User user) {
+        log.info("Updated User by the Id= {} as: {}", user.getId(), user);
         return userService.update(user);
     }
 
-    @DeleteMapping("/delete-diet-plan-byId/{id}")
-    public boolean deleteUserById(@PathVariable Long id){
+    @DeleteMapping("/delete-user-info-byId/{id}")
+    public boolean deleteUserById(@PathVariable Long id) {
         log.info("Deleted User by the Id-> {}", id);
         return userService.delete(id);
     }

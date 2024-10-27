@@ -6,11 +6,13 @@ import edu.ICET.entity.UserEntity;
 import edu.ICET.repository.UserDao;
 import edu.ICET.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -20,19 +22,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean save(User user) {
-         userDao.save(objectMapper.convertValue(user, UserEntity.class));
-         return false;
+        userDao.save(objectMapper.convertValue(user, UserEntity.class));
+        return false;
     }
 
     @Override
     public User search(Long id) {
-        return objectMapper.convertValue(userDao.findById(id),User.class);
+        return objectMapper.convertValue(userDao.findById(id), User.class);
     }
 
     @Override
-    public boolean update(User user) {
+    public boolean update(User newUser) {
+        User user = search(newUser.getId()) != null ? newUser : null;
+        System.out.println(user);
         userDao.save(objectMapper.convertValue(user, UserEntity.class));
-        return false;
+        return newUser.equals(user);
     }
 
     @Override

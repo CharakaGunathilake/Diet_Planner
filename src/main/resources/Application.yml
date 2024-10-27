@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/HospitalManagementSystem
+    url: jdbc:mysql://localhost:3306/DietPlanner
     username: root
     password: 1234
 

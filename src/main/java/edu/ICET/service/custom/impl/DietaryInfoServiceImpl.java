@@ -17,6 +17,7 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
 
     private final DietaryInfoDao dietaryInfoDao;
     private final ObjectMapper objectMapper;
+    private DietaryInfo dietaryInfo;
 
     @Override
     public boolean save(DietaryInfo dietaryInfo) {
@@ -30,9 +31,10 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
     }
 
     @Override
-    public boolean update(DietaryInfo dietaryInfo) {
+    public boolean update(DietaryInfo newDietaryInfo) {
+        DietaryInfo dietaryInfo = search(newDietaryInfo.getId()) != null ? newDietaryInfo : null;
         dietaryInfoDao.save(objectMapper.convertValue(dietaryInfo, DietaryInfoEntity.class));
-        return false;
+        return dietaryInfo.equals(newDietaryInfo);
     }
 
     @Override

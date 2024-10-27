@@ -1,5 +1,6 @@
 package edu.ICET.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +13,7 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity(name = "MealInfo")
 public class MealInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

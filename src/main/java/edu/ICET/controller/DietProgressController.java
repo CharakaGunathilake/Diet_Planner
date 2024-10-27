@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/DietProgress")
+@RequestMapping("/diet-progress")
 public class DietProgressController {
 
     private final DietProgressService dietProgressService;
@@ -36,7 +36,7 @@ public class DietProgressController {
 
     @PutMapping("/update-dietary-progress")
     public boolean updateDietProgress(@Valid @RequestBody DietProgress dietProgress){
-        log.info("Updated DietProgress as-> {}", dietProgress);
+        log.info("Updated DietProgress by the Id = {} as: {}",dietProgress.getId(),dietProgress);
         return dietProgressService.update(dietProgress);
     }
 

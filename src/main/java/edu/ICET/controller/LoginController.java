@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/Login")
+@RequestMapping("/login")
 public class LoginController {
 
     private final LoginService loginService;
@@ -37,7 +37,7 @@ public class LoginController {
 
     @PutMapping("/update-login-info")
     public boolean updateLogin(@Valid @RequestBody Login login){
-        log.info("Updated Login as-> {}", login);
+        log.info("Updated Login by the Id = {} as: {}", login.getId(), login);
         return loginService.update(login);
     }
 
