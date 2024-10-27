@@ -9,6 +9,7 @@ import java.util.Date;
 public class Login {
     private Long id;
     @Size(min = 2, max = 50, message = "Username should be between 2 and 50 characters")
+    @Pattern(regexp = "(?=.*[a-z](?=.*[A-Z])[A-Za-z\\d]){10,}$\n", message = "Invalid Username Format")
     private String username;
     @NotNull(message = "Password cannot be empty!")
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{6,}$\n", message = "Password too weak!")

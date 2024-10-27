@@ -39,6 +39,6 @@ public class DietaryInfo {
     @NotNull
     private Integer caloriesDeficit;
     @NotNull
-    @Pattern(regexp = "^(Normal|Overweight|Underweight)")
+    @Pattern(regexp = "^(Normal|Overweight|Underweight)$\n")
     private String bmiStatus;
 }
