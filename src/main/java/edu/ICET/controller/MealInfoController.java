@@ -1,8 +1,8 @@
 package edu.ICET.controller;
 
 
-import edu.ICET.dto.User;
-import edu.ICET.service.custom.UserService;
+import edu.ICET.dto.MealInfo;
+import edu.ICET.service.custom.MealInfoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,33 +18,33 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/User")
-public class UserController {
+@RequestMapping("/Meal")
+public class MealInfoController {
 
-    private UserService userService;
+    private final MealInfoService mealInfoService;
 
-    @PostMapping("add-user")
-    public boolean addUser(@Valid @RequestBody User user){
-        log.info("Received User-> {}", user);
-        return userService.save(user);
+    @PostMapping("add-meal-info")
+    public boolean addMealInfo(@Valid @RequestBody MealInfo mealInfo){
+        log.info("Received MealInfo-> {}", mealInfo);
+        return mealInfoService.save(mealInfo);
     }
 
-    @GetMapping("/get-user-byId/{id}")
-    public User getUserById(@PathVariable Long id){
-        log.info("Requested User by the Id-> {}", id);
-        return userService.search(id);
+    @GetMapping("/get-meal-info-byId/{id}")
+    public MealInfo getMealInfoById(@PathVariable Long id){
+        log.info("Requested MealInfo by the Id-> {}", id);
+        return mealInfoService.search(id);
     }
 
-    @PutMapping("/update-diet-plan")
-    public boolean updateUser(@Valid @RequestBody User user){
-        log.info("Updated User as-> {}", user);
-        return userService.update(user);
+    @PutMapping("/update-meal-info")
+    public boolean updateMealInfo(@Valid @RequestBody MealInfo mealInfo){
+        log.info("Updated MealInfo as-> {}", mealInfo);
+        return mealInfoService.update(mealInfo);
     }
 
-    @DeleteMapping("/delete-diet-plan-byId/{id}")
-    public boolean deleteUserById(@PathVariable Long id){
-        log.info("Deleted User by the Id-> {}", id);
-        return userService.delete(id);
+    @DeleteMapping("/delete-meal-info-byId/{id}")
+    public boolean deleteMealInfoById(@PathVariable Long id){
+        log.info("Deleted MealInfo by the Id-> {}", id);
+        return mealInfoService.delete(id);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

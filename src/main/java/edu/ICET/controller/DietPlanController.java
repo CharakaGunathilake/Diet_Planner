@@ -1,8 +1,8 @@
 package edu.ICET.controller;
 
 
-import edu.ICET.dto.User;
-import edu.ICET.service.custom.UserService;
+import edu.ICET.dto.DietPlan;
+import edu.ICET.service.custom.DietPlanService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,33 +18,33 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/User")
-public class UserController {
+@RequestMapping("/DietPlan")
+public class DietPlanController {
 
-    private UserService userService;
+    private final DietPlanService dietPlanService;
 
-    @PostMapping("add-user")
-    public boolean addUser(@Valid @RequestBody User user){
-        log.info("Received User-> {}", user);
-        return userService.save(user);
+    @PostMapping("add-diet-plan")
+    public boolean addDietPlan(@Valid @RequestBody DietPlan dietPlan){
+        log.info("Received DietPlan-> {}", dietPlan);
+        return dietPlanService.save(dietPlan);
     }
 
-    @GetMapping("/get-user-byId/{id}")
-    public User getUserById(@PathVariable Long id){
-        log.info("Requested User by the Id-> {}", id);
-        return userService.search(id);
+    @GetMapping("/get-diet-plan-byId/{id}")
+    public DietPlan getDietPlanById(@PathVariable Long id){
+        log.info("Requested DietPlan by the Id-> {}", id);
+        return dietPlanService.search(id);
     }
 
     @PutMapping("/update-diet-plan")
-    public boolean updateUser(@Valid @RequestBody User user){
-        log.info("Updated User as-> {}", user);
-        return userService.update(user);
+    public boolean updateDietPlan(@Valid @RequestBody DietPlan dietPlan){
+        log.info("Updated DietPlan as-> {}", dietPlan);
+        return dietPlanService.update(dietPlan);
     }
 
     @DeleteMapping("/delete-diet-plan-byId/{id}")
-    public boolean deleteUserById(@PathVariable Long id){
-        log.info("Deleted User by the Id-> {}", id);
-        return userService.delete(id);
+    public boolean deleteDietPlanById(@PathVariable Long id){
+        log.info("Deleted DietPlan by the Id-> {}", id);
+        return dietPlanService.delete(id);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

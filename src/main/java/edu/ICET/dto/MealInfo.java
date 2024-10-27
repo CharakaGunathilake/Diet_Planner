@@ -1,31 +1,26 @@
 package edu.ICET.dto;
 
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Plan {
+public class MealInfo {
     private Long id;
-    @Size(min = 2, max = 50, message = "Name should be between 2 and 50 characters")
+    @NotNull
+    @Pattern(regexp = "^(Snack|BreakFast|Lunch|Dinner)$", message = "Invalid meal name")
     private String name;
     @Size(min = 2, max = 150, message = "Description should be between 2 and 50 characters")
     private String description;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startDate;
+    private Integer calories;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endDate;
-    @NotNull
-    private String dietType;
-
-
+    private LocalTime time;
 }

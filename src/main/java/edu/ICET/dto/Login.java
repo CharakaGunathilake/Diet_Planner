@@ -3,9 +3,15 @@ package edu.ICET.dto;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Login {
     private Long id;
     @Size(min = 2, max = 50, message = "Username should be between 2 and 50 characters")
