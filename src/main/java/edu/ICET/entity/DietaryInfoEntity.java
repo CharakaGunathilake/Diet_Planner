@@ -23,6 +23,8 @@ public class DietaryInfoEntity {
     private Double weight;
     private String activityRate;
     private String goals;
+    private String specificCuisine;
+    private String intolerances;
     private Double targetWeight;
     private LocalDate targetDate;
     private Double bmi;

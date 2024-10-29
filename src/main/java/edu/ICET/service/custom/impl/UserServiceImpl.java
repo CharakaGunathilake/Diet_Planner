@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean save(User user) {
         userDao.save(objectMapper.convertValue(user, UserEntity.class));
-        return false;
+        return userDao.existsById(user.getId());
     }
 
     @Override
@@ -33,16 +33,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean update(User newUser) {
-        User user = search(newUser.getId()) != null ? newUser : null;
-        System.out.println(user);
-        userDao.save(objectMapper.convertValue(user, UserEntity.class));
-        return newUser.equals(user);
+        UserEntity mappedEntity = objectMapper.convertValue(search(newUser.getId()), UserEntity.class);
+        userDao.save(mappedEntity);
+        return userDao.equals(mappedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
         userDao.deleteById(id);
-        return false;
+        return !userDao.existsById(id);
     }
 
     @Override

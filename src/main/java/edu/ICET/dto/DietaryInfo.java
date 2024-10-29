@@ -24,6 +24,10 @@ public class DietaryInfo {
     @NotNull
     private String goals;
     @NotNull
+    private String specificCuisine;
+    @NotNull
+    private String intolerances;
+    @NotNull
     @Min(value = 10, message = "Invalid weight")
     @Max(value = 200, message = "Invalid weight")
     private Double targetWeight;

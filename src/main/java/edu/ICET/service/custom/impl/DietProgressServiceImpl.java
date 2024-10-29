@@ -22,7 +22,7 @@ public class DietProgressServiceImpl implements DietProgressService {
     @Override
     public boolean save(DietProgress dietProgress) {
         dietProgressDao.save(objectMapper.convertValue(dietProgress, DietProgressEntity.class));
-        return false;
+        return dietProgressDao.existsById(dietProgress.getId());
     }
 
     @Override
@@ -32,15 +32,15 @@ public class DietProgressServiceImpl implements DietProgressService {
 
     @Override
     public boolean update(DietProgress newDietProgress) {
-        DietProgress dietProgress = search(newDietProgress.getId()) != null ? newDietProgress : null;
-        dietProgressDao.save(objectMapper.convertValue(dietProgress, DietProgressEntity.class));
-        return dietProgress.equals(newDietProgress);
+        DietProgressEntity mappedEntity =  objectMapper.convertValue(search(newDietProgress.getId()), DietProgressEntity.class);
+        dietProgressDao.save(mappedEntity);
+        return dietProgressDao.equals(newDietProgress);
     }
 
     @Override
     public boolean delete(Long id) {
         dietProgressDao.deleteById(id);
-        return false;
+        return !dietProgressDao.existsById(id);
     }
 
     @Override

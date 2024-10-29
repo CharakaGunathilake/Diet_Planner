@@ -23,7 +23,7 @@ public class DietDietPlanServiceImpl implements DietPlanService {
     @Override
     public boolean save(DietPlan dietPlan) {
         dietPlanDao.save(objectMapper.convertValue(dietPlan, DietPlanEntity.class));
-        return false;
+        return dietPlanDao.existsById(dietPlan.getId());
     }
 
     @Override
@@ -33,15 +33,15 @@ public class DietDietPlanServiceImpl implements DietPlanService {
 
     @Override
     public boolean update(DietPlan newdietPlan) {
-        DietPlan dietPlan = search(newdietPlan.getId()) != null ? newdietPlan : null;
-        dietPlanDao.save(objectMapper.convertValue(dietPlan, DietPlanEntity.class));
-        return dietPlan.equals(newdietPlan);
+        DietPlanEntity mappedEntity =  objectMapper.convertValue(search(newdietPlan.getId()), DietPlanEntity.class);
+        dietPlanDao.save(mappedEntity);
+        return dietPlanDao.equals(newdietPlan);
     }
 
     @Override
     public boolean delete(Long id) {
         dietPlanDao.deleteById(id);
-        return false;
+        return !dietPlanDao.existsById(id);
     }
 
     @Override

@@ -17,12 +17,11 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
 
     private final DietaryInfoDao dietaryInfoDao;
     private final ObjectMapper objectMapper;
-    private DietaryInfo dietaryInfo;
 
     @Override
     public boolean save(DietaryInfo dietaryInfo) {
         dietaryInfoDao.save(objectMapper.convertValue(dietaryInfo, DietaryInfoEntity.class));
-        return false;
+        return dietaryInfoDao.existsById(dietaryInfo.getId());
     }
 
     @Override
@@ -32,15 +31,15 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
 
     @Override
     public boolean update(DietaryInfo newDietaryInfo) {
-        DietaryInfo dietaryInfo = search(newDietaryInfo.getId()) != null ? newDietaryInfo : null;
-        dietaryInfoDao.save(objectMapper.convertValue(dietaryInfo, DietaryInfoEntity.class));
-        return dietaryInfo.equals(newDietaryInfo);
+        DietaryInfoEntity mappedEntity = objectMapper.convertValue(search(newDietaryInfo.getId()), DietaryInfoEntity.class);
+        dietaryInfoDao.save(mappedEntity);
+        return dietaryInfoDao.equals(mappedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
         dietaryInfoDao.deleteById(id);
-        return false;
+        return !dietaryInfoDao.existsById(id);
     }
 
     @Override

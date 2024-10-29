@@ -26,7 +26,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public boolean save(Login login) {
         loginDao.save(objectMapper.convertValue(login, LoginEntity.class));
-        return false;
+        return loginDao.existsById(login.getId());
     }
 
     @Override
@@ -36,16 +36,16 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean update(Login newLogin) {
-        Login login = search(newLogin.getId()) != null ? newLogin : null;
-        loginDao.save(objectMapper.convertValue(login, LoginEntity.class));
-        return login.equals(newLogin);
+        LoginEntity mappedEntity = objectMapper.convertValue(search(newLogin.getId()), LoginEntity.class);
+        loginDao.save(mappedEntity);
+        return loginDao.equals(mappedEntity);
     }
 
 
     @Override
     public boolean delete(Long id) {
         loginDao.deleteById(id);
-        return false;
+        return !loginDao.existsById(id);
     }
 
     @Override

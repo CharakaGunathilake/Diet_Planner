@@ -23,7 +23,7 @@ public class MealInfoServiceImpl implements MealInfoService {
     @Override
     public boolean save(MealInfo mealInfo) {
         mealInfoDao.save(objectMapper.convertValue(mealInfo, MealInfoEntity.class));
-        return false;
+        return mealInfoDao.existsById(mealInfo.getId());
     }
 
     @Override
@@ -33,15 +33,15 @@ public class MealInfoServiceImpl implements MealInfoService {
 
     @Override
     public boolean update(MealInfo newMealInfo) {
-        MealInfo mealInfo = search(newMealInfo.getId()) != null ? newMealInfo : null;
-        mealInfoDao.save(objectMapper.convertValue(mealInfo, MealInfoEntity.class));
-        return mealInfo.equals(newMealInfo);
+        MealInfoEntity mappedEntity = objectMapper.convertValue(search(newMealInfo.getId()), MealInfoEntity.class);
+        mealInfoDao.save(mappedEntity);
+        return mealInfoDao.equals(mappedEntity);
     }
 
     @Override
     public boolean delete(Long id) {
         mealInfoDao.deleteById(id);
-        return false;
+        return !mealInfoDao.existsById(id);
     }
 
     @Override
