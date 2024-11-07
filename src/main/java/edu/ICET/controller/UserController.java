@@ -2,7 +2,7 @@ package edu.ICET.controller;
 
 
 import edu.ICET.dto.User;
-import edu.ICET.service.custom.UserService;
+import edu.ICET.service.custom.UserServiceMy;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceMy userService;
 
     @PostMapping("add-user")
     public boolean addUser(@Valid @RequestBody User user) {

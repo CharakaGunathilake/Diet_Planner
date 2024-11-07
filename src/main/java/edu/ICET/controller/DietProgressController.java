@@ -1,7 +1,7 @@
 package edu.ICET.controller;
 
 import edu.ICET.dto.DietProgress;
-import edu.ICET.service.custom.DietProgressService;
+import edu.ICET.service.custom.DietProgressServiceMy;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.Map;
 @RequestMapping("/diet-progress")
 public class DietProgressController {
 
-    private final DietProgressService dietProgressService;
+    private final DietProgressServiceMy dietProgressService;
 
     @PostMapping("add-dietary-progress")
     public boolean addDietProgress(@Valid @RequestBody DietProgress dietProgress){

@@ -1,13 +1,10 @@
 package edu.ICET.service.custom.impl;
 
-import ch.qos.logback.core.util.COWArrayList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.Login;
-import edu.ICET.dto.User;
 import edu.ICET.entity.LoginEntity;
-import edu.ICET.entity.MealInfoEntity;
 import edu.ICET.repository.LoginDao;
-import edu.ICET.service.custom.LoginService;
+import edu.ICET.service.custom.LoginServiceMy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImplMy implements LoginServiceMy {
 
     private final LoginDao loginDao;
     private final ObjectMapper objectMapper;

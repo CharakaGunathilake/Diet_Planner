@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.User;
 import edu.ICET.entity.UserEntity;
 import edu.ICET.repository.UserDao;
-import edu.ICET.service.custom.UserService;
+import edu.ICET.service.custom.UserServiceMy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImplMy implements UserServiceMy {
 
     private final UserDao userDao;
     private final ObjectMapper objectMapper;

@@ -2,7 +2,7 @@ package edu.ICET.controller;
 
 
 import edu.ICET.dto.Login;
-import edu.ICET.service.custom.LoginService;
+import edu.ICET.service.custom.LoginServiceMy;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/login")
 public class LoginController {
 
-    private final LoginService loginService;
+    private final LoginServiceMy loginService;
 
     @PostMapping("add-login")
     public boolean addLogin(@Valid @RequestBody Login login){

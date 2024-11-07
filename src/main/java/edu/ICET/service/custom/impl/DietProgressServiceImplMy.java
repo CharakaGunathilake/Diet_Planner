@@ -2,10 +2,9 @@ package edu.ICET.service.custom.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.DietProgress;
-import edu.ICET.dto.Login;
 import edu.ICET.entity.DietProgressEntity;
 import edu.ICET.repository.DietProgressDao;
-import edu.ICET.service.custom.DietProgressService;
+import edu.ICET.service.custom.DietProgressServiceMy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DietProgressServiceImpl implements DietProgressService {
+public class DietProgressServiceImplMy implements DietProgressServiceMy {
 
     private final DietProgressDao dietProgressDao;
     private final ObjectMapper objectMapper;

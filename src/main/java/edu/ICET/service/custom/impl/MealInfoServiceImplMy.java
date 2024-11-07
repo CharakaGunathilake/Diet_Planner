@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.MealInfo;
 import edu.ICET.entity.MealInfoEntity;
 import edu.ICET.repository.MealInfoDao;
-import edu.ICET.service.custom.MealInfoService;
+import edu.ICET.service.custom.MealInfoServiceMy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class MealInfoServiceImpl implements MealInfoService {
+public class MealInfoServiceImplMy implements MealInfoServiceMy {
 
     private final MealInfoDao mealInfoDao;
     private final ObjectMapper objectMapper;

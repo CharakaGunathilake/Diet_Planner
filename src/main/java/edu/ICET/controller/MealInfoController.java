@@ -2,7 +2,7 @@ package edu.ICET.controller;
 
 
 import edu.ICET.dto.MealInfo;
-import edu.ICET.service.custom.MealInfoService;
+import edu.ICET.service.custom.MealInfoServiceMy;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RequestMapping("/meal-info")
 public class MealInfoController {
 
-    private final MealInfoService mealInfoService;
+    private final MealInfoServiceMy mealInfoService;
 
     @PostMapping("add-meal-info")
     public boolean addMealInfo(@Valid @RequestBody MealInfo mealInfo){

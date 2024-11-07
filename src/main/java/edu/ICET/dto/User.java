@@ -1,6 +1,5 @@
 package edu.ICET.dto;
 
-import edu.ICET.dto.patterns.Pattern;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +18,7 @@ public class User {
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
     private String lastName;
     @NotNull(message = "Gender Cannot be empty!")
-    @edu.ICET.dto.patterns.Pattern(regexp = "^(Male|Female|Other)$", message = "Invalid gender")
+    @jakarta.validation.constraints.Pattern(regexp = "^(Male|Female|Other)$", message = "Invalid gender")
     private String gender;
     @NotNull(message = "Birthday Cannot be empty!")
     @Past(message = "Invalid Birthday")
