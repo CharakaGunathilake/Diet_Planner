@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.User;
 import edu.ICET.entity.UserEntity;
 import edu.ICET.repository.UserDao;
-import edu.ICET.service.custom.UserServiceMy;
+import edu.ICET.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserServiceImplMy implements UserServiceMy {
+public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
     private final ObjectMapper objectMapper;
@@ -23,7 +23,7 @@ public class UserServiceImplMy implements UserServiceMy {
     @Override
     public boolean save(User user) {
         userDao.save(objectMapper.convertValue(user, UserEntity.class));
-        return userDao.existsById(user.getId());
+        return userDao.equals(user);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UserServiceImplMy implements UserServiceMy {
 
     @Override
     public boolean update(User newUser) {
-        UserEntity mappedEntity = objectMapper.convertValue(search(newUser.getId()), UserEntity.class);
+        UserEntity mappedEntity = objectMapper.convertValue(newUser, UserEntity.class);
         userDao.save(mappedEntity);
         return userDao.equals(mappedEntity);
     }

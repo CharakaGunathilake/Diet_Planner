@@ -2,7 +2,7 @@ package edu.ICET.controller;
 
 
 import edu.ICET.dto.DietPlan;
-import edu.ICET.service.custom.DietPlanServiceMy;
+import edu.ICET.service.custom.DietPlanService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +21,9 @@ import java.util.Map;
 @RequestMapping("/diet-plan")
 public class DietPlanController {
 
-    private final DietPlanServiceMy dietPlanService;
+    private final DietPlanService dietPlanService;
 
-    @PostMapping("add-diet-plan")
+    @PostMapping("/add-diet-plan")
     public boolean addDietPlan(@Valid @RequestBody DietPlan dietPlan){
         log.info("Received DietPlan-> {}", dietPlan);
         return dietPlanService.save(dietPlan);

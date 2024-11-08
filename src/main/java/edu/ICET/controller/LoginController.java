@@ -2,7 +2,7 @@ package edu.ICET.controller;
 
 
 import edu.ICET.dto.Login;
-import edu.ICET.service.custom.LoginServiceMy;
+import edu.ICET.service.custom.LoginService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,22 +17,21 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/login")
 public class LoginController {
+    private final LoginService loginService;
 
-    private final LoginServiceMy loginService;
-
-    @PostMapping("add-login")
+    @PostMapping("/add-login")
     public boolean addLogin(@Valid @RequestBody Login login){
         log.info("Received Login-> {}", login);
         return loginService.save(login);
     }
 
-    @GetMapping("/get-login-byId/{id}")
-    public Login getLoginById(@PathVariable Long id){
-        log.info("Requested Login by the Id-> {}", id);
-        return loginService.search(id);
+    @GetMapping("/get-login-byId/{username}")
+    public Login getLoginByUsername(@PathVariable String username){
+        log.info("Requested Login by the Username-> {}", username);
+        return loginService.searchByUsername(username);
     }
 
     @PutMapping("/update-login-info")
@@ -45,6 +44,11 @@ public class LoginController {
     public boolean deleteLoginById(@PathVariable Long id){
         log.info("Deleted Login by the Id-> {}", id);
         return loginService.delete(id);
+    }
+
+    @GetMapping("/check-username/{username}")
+    public  boolean checkUsername(@PathVariable String username){
+        return loginService.checkUsername(username);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

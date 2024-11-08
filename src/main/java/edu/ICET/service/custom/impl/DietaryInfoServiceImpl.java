@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.DietaryInfo;
 import edu.ICET.entity.DietaryInfoEntity;
 import edu.ICET.repository.DietaryInfoDao;
-import edu.ICET.service.custom.DietaryInfoServiceMy;
+import edu.ICET.service.custom.DietaryInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DietaryInfoServiceImplMy implements DietaryInfoServiceMy {
+public class DietaryInfoServiceImpl implements DietaryInfoService {
 
     private final DietaryInfoDao dietaryInfoDao;
     private final ObjectMapper objectMapper;

@@ -2,7 +2,7 @@ package edu.ICET.controller;
 
 
 import edu.ICET.dto.User;
-import edu.ICET.service.custom.UserServiceMy;
+import edu.ICET.service.custom.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,13 +17,13 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/user")
 public class UserController {
 
-    private final UserServiceMy userService;
+    private final UserService userService;
 
-    @PostMapping("add-user")
+    @PostMapping("/add-user")
     public boolean addUser(@Valid @RequestBody User user) {
         log.info("Received User-> {}", user);
         return userService.save(user);

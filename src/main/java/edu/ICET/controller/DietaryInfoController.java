@@ -1,7 +1,7 @@
 package edu.ICET.controller;
 
 import edu.ICET.dto.DietaryInfo;
-import edu.ICET.service.custom.DietaryInfoServiceMy;
+import edu.ICET.service.custom.DietaryInfoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +20,9 @@ import java.util.Map;
 @RequestMapping("/dietary-info")
 public class DietaryInfoController {
 
-    private final DietaryInfoServiceMy dietaryInfoService;
+    private final DietaryInfoService dietaryInfoService;
 
-    @PostMapping("add-dietary-info")
+    @PostMapping("/add-dietary-info")
     public boolean addDietaryInfo(@Valid @RequestBody DietaryInfo dietaryInfo){
         log.info("Received DietaryInfo-> {}", dietaryInfo);
         return dietaryInfoService.save(dietaryInfo);

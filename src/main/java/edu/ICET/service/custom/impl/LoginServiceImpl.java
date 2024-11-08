@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.Login;
 import edu.ICET.entity.LoginEntity;
 import edu.ICET.repository.LoginDao;
-import edu.ICET.service.custom.LoginServiceMy;
+import edu.ICET.service.custom.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class LoginServiceImplMy implements LoginServiceMy {
+public class LoginServiceImpl implements LoginService {
 
     private final LoginDao loginDao;
     private final ObjectMapper objectMapper;
@@ -52,5 +52,18 @@ public class LoginServiceImplMy implements LoginServiceMy {
             loginList.add(objectMapper.convertValue(loginEntity, Login.class));
         });
         return loginList;
+    }
+
+    @Override
+    public boolean checkUsername(String username) {
+        List<Login> loginList = getAll();
+        for (Login login : loginList) {
+            return login.getUsername().equalsIgnoreCase(username);
+        }return false;
+    }
+
+    @Override
+    public Login searchByUsername(String username) {
+        return objectMapper.convertValue(loginDao.findByUsername(username),Login.class);
     }
 }
