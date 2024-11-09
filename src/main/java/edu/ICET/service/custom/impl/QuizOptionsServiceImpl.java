@@ -22,7 +22,6 @@ public class QuizOptionsServiceImpl implements QuizOptionsService {
     @Override
     public boolean save(QuizOptions quizOptions) {
         QuizOptionsEntity entity = objectMapper.convertValue(quizOptions, QuizOptionsEntity.class);
-        System.out.println(entity);
         quizOptionsDao.save(entity);
         return quizOptionsDao.existsById(quizOptions.getOption_id());
     }
@@ -52,15 +51,9 @@ public class QuizOptionsServiceImpl implements QuizOptionsService {
     }
 
     @Override
-    public List<QuizOptionsEntity> getAllOptions() {
-        return quizOptionsDao.findAll();
-    }
-
-    @Override
     public boolean saveAll(List<QuizOptions> quizOptionsList) {
         boolean bool = false;
         for (QuizOptions options : quizOptionsList) {
-            System.out.println(options);
             if (save(options)) {
                 bool = true;
             } else {
@@ -68,5 +61,14 @@ public class QuizOptionsServiceImpl implements QuizOptionsService {
             }
         }
         return bool;
+    }
+
+    @Override
+    public List<QuizOptions> searchAllByQuestionId(Long id) {
+        List<QuizOptions> quizOptionsList = new ArrayList<>();
+        quizOptionsDao.findByQuestionId(id).forEach(quizOptionsEntity -> {
+            quizOptionsList.add(objectMapper.convertValue(quizOptionsEntity, QuizOptions.class));
+        });
+        return quizOptionsList;
     }
 }

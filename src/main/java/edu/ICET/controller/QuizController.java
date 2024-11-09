@@ -1,11 +1,9 @@
 package edu.ICET.controller;
 
 
-import edu.ICET.dto.QuizOptions;
+import edu.ICET.dto.QuizObject;
 import edu.ICET.dto.QuizQuestions;
-import edu.ICET.dto.User;
 import edu.ICET.service.custom.QuizQuestionsService;
-import edu.ICET.service.custom.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,15 +20,14 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/quiz-questions")
-public class QuizQuestionController {
+@RequestMapping("/quiz")
+public class QuizController {
     private final QuizQuestionsService quizQuestionsService;
 
     @PostMapping("/add-question")
     public boolean addQuestion(@Valid @RequestBody QuizQuestions question) {
         log.info("Received QuizQuestion-> {}", question);
         return quizQuestionsService.save(question);
-
     }
 
     @PostMapping("/add-questionList")
@@ -46,9 +43,14 @@ public class QuizQuestionController {
     }
 
     @GetMapping("/getAll")
-    public List<QuizQuestions> getAll() {
+    public List<QuizObject> getAll() {
         log.info("Requested All QuizQuestions");
-        return quizQuestionsService.getAll();
+        return quizQuestionsService.getAllObjects();
+    }
+    @GetMapping("/getAllByType/{type}")
+    public List<QuizObject> getAllByType(@PathVariable String type) {
+        log.info("Requested All QuizQuestions by the type-> {}", type);
+        return quizQuestionsService.getByObjectType(type.toUpperCase());
     }
 
     @PutMapping("/update-question-info")

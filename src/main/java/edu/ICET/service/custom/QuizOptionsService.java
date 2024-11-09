@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface QuizOptionsService extends SuperService<QuizOptions> {
-    List<QuizOptionsEntity> getAllOptions();
     boolean saveAll(List<QuizOptions> quizOptions);
+    List<QuizOptions> searchAllByQuestionId(Long id);
 }
