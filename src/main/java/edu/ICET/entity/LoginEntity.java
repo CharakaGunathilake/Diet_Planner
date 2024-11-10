@@ -21,4 +21,5 @@ public class LoginEntity {
     private String username;
     private String password;
     private Date loginDate;
+    private Long UserId;
 }

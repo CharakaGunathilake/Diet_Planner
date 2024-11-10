@@ -5,6 +5,7 @@ import edu.ICET.dto.DietPlan;
 import edu.ICET.entity.DietPlanEntity;
 import edu.ICET.repository.DietPlanDao;
 import edu.ICET.service.custom.DietPlanService;
+import edu.ICET.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,11 @@ public class DietDietPlanServiceImpl implements DietPlanService {
 
     private final DietPlanDao dietPlanDao;
     private final ObjectMapper objectMapper;
+    private final UserService userService;
 
     @Override
     public boolean save(DietPlan dietPlan) {
+        dietPlan.setUserId(userService.getUserId());
         dietPlanDao.save(objectMapper.convertValue(dietPlan, DietPlanEntity.class));
         return dietPlanDao.existsById(dietPlan.getId());
     }

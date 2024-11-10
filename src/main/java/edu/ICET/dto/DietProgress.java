@@ -31,4 +31,5 @@ public class DietProgress {
     @Min(value = 2)
     @Max(value = 6)
     private Integer mealsTaken;
+    private Long UserId;
 }

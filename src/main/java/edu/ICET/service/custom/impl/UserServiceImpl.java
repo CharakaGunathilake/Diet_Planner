@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
         });
         return userList;
     }
+
+    @Override
+    public Long getUserId() {
+        return userDao.count();
+    }
 }

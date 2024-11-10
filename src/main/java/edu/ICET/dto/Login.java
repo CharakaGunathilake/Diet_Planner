@@ -23,4 +23,5 @@ public class Login {
     private String password;
     @NotNull
     private Date loginDate;
+    private Long UserId;
 }

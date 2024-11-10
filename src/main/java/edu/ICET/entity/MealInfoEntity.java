@@ -22,5 +22,5 @@ public class MealInfoEntity {
     private String description;
     private Integer calories;
     private LocalTime time;
-
+    private Long UserId;
 }

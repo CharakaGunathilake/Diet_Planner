@@ -29,7 +29,7 @@ public class User {
     private Integer age;
     @NotNull(message = "Height cannot be empty!")
     @Min(value = 2, message = "Not a valid height")
-    @Max(value = 12, message = "Not a valid height")
+    @Max(value = 240, message = "Not a valid height")
     private Double height;
     @NotNull(message = "Weight cannot be empty!")
     @Min(value = 10, message = "Not a valid weight")

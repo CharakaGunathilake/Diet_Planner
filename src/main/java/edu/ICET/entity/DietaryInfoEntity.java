@@ -21,15 +21,22 @@ public class DietaryInfoEntity {
     private Integer age;
     private Double height;
     private Double weight;
+    private String dietPreference;
     private String activityRate;
-    private String goals;
+    private String goal;
     private String specificCuisine;
     private String intolerances;
     private Double targetWeight;
     private LocalDate targetDate;
+    private String caloriesDeficit;
     private Double bmi;
-    private String dcr;
+    private Integer waterIntake;
     private Integer caloriesNeeded;
-    private Integer caloriesDeficit;
+    private String sleepPattern;
+    private String stressFrequency;
+    private Integer mealPlan;
+    private String cookingHabit;
+    private Integer dcr;
     private String bmiStatus;
+    private Long UserId;
 }

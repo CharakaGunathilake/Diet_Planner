@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.DietaryInfo;
 import edu.ICET.entity.DietaryInfoEntity;
 import edu.ICET.repository.DietaryInfoDao;
+import edu.ICET.repository.UserDao;
 import edu.ICET.service.custom.DietaryInfoService;
+import edu.ICET.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +19,13 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
 
     private final DietaryInfoDao dietaryInfoDao;
     private final ObjectMapper objectMapper;
+    private final UserService userService;
 
     @Override
     public boolean save(DietaryInfo dietaryInfo) {
+        dietaryInfo.setUserId(userService.getUserId());
         dietaryInfoDao.save(objectMapper.convertValue(dietaryInfo, DietaryInfoEntity.class));
-        return dietaryInfoDao.existsById(dietaryInfo.getId());
+        return dietaryInfoDao.equals(dietaryInfo);
     }
 
     @Override

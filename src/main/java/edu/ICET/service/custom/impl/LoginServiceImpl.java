@@ -5,6 +5,7 @@ import edu.ICET.dto.Login;
 import edu.ICET.entity.LoginEntity;
 import edu.ICET.repository.LoginDao;
 import edu.ICET.service.custom.LoginService;
+import edu.ICET.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,13 @@ public class LoginServiceImpl implements LoginService {
 
     private final LoginDao loginDao;
     private final ObjectMapper objectMapper;
+    private final UserService userService;
 
     @Override
     public boolean save(Login login) {
+        login.setUserId(userService.getUserId());
         loginDao.save(objectMapper.convertValue(login, LoginEntity.class));
-        return loginDao.existsById(login.getId());
+        return loginDao.equals(login);
     }
 
     @Override

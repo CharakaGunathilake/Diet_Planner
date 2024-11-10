@@ -20,9 +20,11 @@ public class DietaryInfo {
     @NotNull
     private Double weight;
     @NotNull
+    private String dietPreference;
+    @NotNull
     private String activityRate;
     @NotNull
-    private String goals;
+    private String goal;
     @NotNull
     private String specificCuisine;
     @NotNull
@@ -34,15 +36,25 @@ public class DietaryInfo {
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate targetDate;
+    private Integer caloriesDeficit;
     @NotNull
     private Double bmi;
-    @Size(min = 1, max = 20, message = "Invalid dcr")
-    private String dcr;
+    @NotNull
+    private Integer waterIntake;
+    @NotNull
+    private String sleepPattern;
+    @NotNull
+    private String stressFrequency;
     @NotNull
     private Integer caloriesNeeded;
     @NotNull
-    private Integer caloriesDeficit;
+    private Integer mealPlan;
     @NotNull
-    @Pattern(regexp = "^(Overweight|Normal|Underweight)$")
+    private String cookingHabit;
+    @NotNull
+    private Integer dcr;
+    @NotNull
+    @Pattern(regexp = "^(Overweight|Normal|Underweight|Obese)$")
     private String bmiStatus;
+    private Long UserId;
 }

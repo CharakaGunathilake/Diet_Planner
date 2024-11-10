@@ -23,4 +23,6 @@ public class MealInfo {
     private Integer calories;
     @NotNull
     private LocalTime time;
+    @NotNull
+    private Long UserId;
 }

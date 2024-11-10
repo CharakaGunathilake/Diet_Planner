@@ -14,4 +14,5 @@ public class QuizObject {
     private Long id;
     private QuizQuestions quizQuestion;
     private List<QuizOptions> quizOption;
+
 }

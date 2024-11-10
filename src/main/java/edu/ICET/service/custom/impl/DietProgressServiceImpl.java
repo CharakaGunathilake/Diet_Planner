@@ -5,6 +5,7 @@ import edu.ICET.dto.DietProgress;
 import edu.ICET.entity.DietProgressEntity;
 import edu.ICET.repository.DietProgressDao;
 import edu.ICET.service.custom.DietProgressService;
+import edu.ICET.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,11 @@ public class DietProgressServiceImpl implements DietProgressService {
 
     private final DietProgressDao dietProgressDao;
     private final ObjectMapper objectMapper;
+    private final UserService userService;
 
     @Override
     public boolean save(DietProgress dietProgress) {
+        dietProgress.setUserId(userService.getUserId());
         dietProgressDao.save(objectMapper.convertValue(dietProgress, DietProgressEntity.class));
         return dietProgressDao.existsById(dietProgress.getId());
     }
