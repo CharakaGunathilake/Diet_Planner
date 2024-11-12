@@ -28,7 +28,7 @@ public class QuizOptionsServiceImpl implements QuizOptionsService {
 
     @Override
     public QuizOptions search(Long id) {
-        return null;
+        return objectMapper.convertValue(quizOptionsDao.findById(id), QuizOptions.class);
     }
 
     @Override

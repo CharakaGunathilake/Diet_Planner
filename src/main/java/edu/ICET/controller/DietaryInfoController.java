@@ -24,6 +24,7 @@ public class DietaryInfoController {
 
     @PostMapping("/add-dietary-info")
     public boolean addDietaryInfo(@Valid @RequestBody DietaryInfo dietaryInfo){
+        System.out.println(dietaryInfo);
         log.info("Received DietaryInfo-> {}", dietaryInfo);
         return dietaryInfoService.save(dietaryInfo);
     }

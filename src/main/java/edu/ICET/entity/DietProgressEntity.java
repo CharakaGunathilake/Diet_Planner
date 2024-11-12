@@ -24,5 +24,5 @@ public class DietProgressEntity {
     private Integer targetAchieved;
     private String description;
     private Integer mealsTaken;
-    private Long UserId;
+    private Long userId;
 }

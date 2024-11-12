@@ -1,14 +1,11 @@
 package edu.ICET.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -26,8 +23,8 @@ public class DietaryInfoEntity {
     private String goal;
     private String specificCuisine;
     private String intolerances;
-    private Double targetWeight;
-    private LocalDate targetDate;
+    private Integer targetWeight;
+    private Date targetDate;
     private String caloriesDeficit;
     private Double bmi;
     private Integer waterIntake;
@@ -38,5 +35,7 @@ public class DietaryInfoEntity {
     private String cookingHabit;
     private Integer dcr;
     private String bmiStatus;
-    private Long UserId;
+    @OneToOne(mappedBy = "dietaryInfo")
+    @JoinColumn(table = "UserPlan",name = "detailId", referencedColumnName = "id")
+    private UserWithPlanEntity detailId;
 }

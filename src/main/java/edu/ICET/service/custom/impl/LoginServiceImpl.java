@@ -20,11 +20,9 @@ public class LoginServiceImpl implements LoginService {
 
     private final LoginDao loginDao;
     private final ObjectMapper objectMapper;
-    private final UserService userService;
 
     @Override
     public boolean save(Login login) {
-        login.setUserId(userService.getUserId());
         loginDao.save(objectMapper.convertValue(login, LoginEntity.class));
         return loginDao.equals(login);
     }

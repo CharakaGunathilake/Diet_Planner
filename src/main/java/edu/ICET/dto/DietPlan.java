@@ -26,5 +26,5 @@ public class DietPlan {
     private LocalDate endDate;
     @NotNull
     private String dietType;
-    private Long UserId;
+    private Long userId;
 }

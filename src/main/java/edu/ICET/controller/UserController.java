@@ -1,7 +1,10 @@
 package edu.ICET.controller;
 
 
+import edu.ICET.dto.DietaryInfo;
+import edu.ICET.dto.Login;
 import edu.ICET.dto.User;
+import edu.ICET.dto.UserWithPlan;
 import edu.ICET.service.custom.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +23,15 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/user")
 public class UserController {
-
     private final UserService userService;
 
+    @PostMapping("/add-user-with-plan")
+    public boolean addUserWithPlan(@Valid @RequestBody UserWithPlan userWithPlan) {
+        log.info("Received UserWithPlan-> {}", userWithPlan.getUser());
+        log.info("Received UserLogin-> {}", userWithPlan.getLogin());
+        log.info("Received UserDietary-> {}", userWithPlan.getDietaryInfo());
+        return userService.saveNewUser(userWithPlan);
+    }
     @PostMapping("/add-user")
     public boolean addUser(@Valid @RequestBody User user) {
         log.info("Received User-> {}", user);

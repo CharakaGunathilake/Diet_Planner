@@ -7,12 +7,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class DietaryInfo {
     private Long id;
+    @NotNull
+    private String gender;
     @NotNull
     private Integer age;
     @NotNull
@@ -32,12 +35,11 @@ public class DietaryInfo {
     @NotNull
     @Min(value = 10, message = "Invalid weight")
     @Max(value = 200, message = "Invalid weight")
-    private Double targetWeight;
+    private Integer targetWeight;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate targetDate;
+    private String targetDateString;
+    private Date targetDate;
     private Integer caloriesDeficit;
-    @NotNull
     private Double bmi;
     @NotNull
     private Integer waterIntake;
@@ -45,16 +47,12 @@ public class DietaryInfo {
     private String sleepPattern;
     @NotNull
     private String stressFrequency;
-    @NotNull
     private Integer caloriesNeeded;
     @NotNull
     private Integer mealPlan;
     @NotNull
     private String cookingHabit;
-    @NotNull
     private Integer dcr;
-    @NotNull
-    @Pattern(regexp = "^(Overweight|Normal|Underweight|Obese)$")
     private String bmiStatus;
-    private Long UserId;
+    private Long userId;
 }
