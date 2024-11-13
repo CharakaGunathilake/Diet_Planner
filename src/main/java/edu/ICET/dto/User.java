@@ -4,6 +4,8 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -22,7 +24,7 @@ public class User {
     private String gender;
     @NotNull(message = "Birthday Cannot be empty!")
     @Past(message = "Invalid Birthday")
-    private Date birthDay;
+    private LocalDate birthDay;
     @NotNull(message = "Age cannot be empty!")
     @Min(value = 5, message = "Age too low")
     @Max(value = 100, message = "Invalid age")

@@ -62,7 +62,6 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
     }
 
     private Integer calculateDCR(String activityRate, String gender, Double weight, Double height, Integer age) {
-        System.out.println( activityRate + " - " +  gender + " - " +  weight + " - " +  height + " - " +  age);
         double dcr;
         switch (gender) {
             case "Male":
@@ -71,7 +70,6 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
                 return (int) (dcr * getActivityRate(activityRate));
             case "Female":
                 dcr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
-                System.out.println(dcr);
                 return (int) (dcr * getActivityRate(activityRate));
             default:
                 return 0;
