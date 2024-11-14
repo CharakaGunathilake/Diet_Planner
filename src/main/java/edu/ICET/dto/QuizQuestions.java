@@ -1,17 +1,10 @@
 package edu.ICET.dto;
 
-import edu.ICET.entity.QuestionType;
-import edu.ICET.entity.QuizOptionsEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor

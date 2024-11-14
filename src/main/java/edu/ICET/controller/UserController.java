@@ -29,7 +29,8 @@ public class UserController {
     public boolean addUserWithPlan(@Valid @RequestBody UserWithPlan userWithPlan) {
         log.info("Received UserWithPlan-> {}", userWithPlan.getUser());
         log.info("Received UserLogin-> {}", userWithPlan.getLogin());
-        log.info("Received UserDietary-> {}", userWithPlan.getDietaryInfo());
+        log.info("Received UserDietPlan-> {}", userWithPlan.getDietPlan());
+        log.info("Received UserDietaryInfo-> {}", userWithPlan.getDietaryInfo());
         return userService.saveNewUser(userWithPlan);
     }
     @PostMapping("/add-user")

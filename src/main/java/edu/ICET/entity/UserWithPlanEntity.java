@@ -25,4 +25,7 @@ public class UserWithPlanEntity {
     @OneToOne(targetEntity = DietaryInfoEntity.class,cascade = {CascadeType.ALL,CascadeType.REMOVE})
     @JoinColumn(name = "dietary_info_id", referencedColumnName = "id")
     private DietaryInfoEntity dietaryInfo;
+    @OneToOne(targetEntity = DietPlanEntity.class,cascade = {CascadeType.ALL,CascadeType.REMOVE})
+    @JoinColumn(name = "plan_id", referencedColumnName = "id")
+    private DietPlanEntity dietPlan;
 }

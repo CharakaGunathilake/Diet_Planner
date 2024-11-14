@@ -48,6 +48,7 @@ public class LoginController {
 
     @GetMapping("/check-username/{username}")
     public  boolean checkUsername(@PathVariable String username){
+        log.info("Requested availability of username-> {}",username);
         return loginService.checkUsername(username);
     }
 

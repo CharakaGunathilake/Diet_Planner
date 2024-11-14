@@ -1,19 +1,18 @@
 package edu.ICET.service.custom.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.ICET.dto.DietaryInfo;
-import edu.ICET.dto.Login;
-import edu.ICET.dto.User;
-import edu.ICET.dto.UserWithPlan;
+import edu.ICET.dto.*;
 import edu.ICET.entity.UserEntity;
 import edu.ICET.entity.UserWithPlanEntity;
 import edu.ICET.repository.DietaryInfoDao;
 import edu.ICET.repository.LoginDao;
 import edu.ICET.repository.UserDao;
 import edu.ICET.repository.UserWithPlanDao;
+import edu.ICET.service.custom.DietPlanService;
 import edu.ICET.service.custom.DietaryInfoService;
 import edu.ICET.service.custom.LoginService;
 import edu.ICET.service.custom.UserService;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.orm.hibernate5.SpringSessionContext;
@@ -73,8 +72,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean saveNewUser(UserWithPlan userWithPlan) {
         dietaryInfoService.setCalculatedData(userWithPlan.getDietaryInfo());
+        userWithPlan.getDietPlan().setEndDate(userWithPlan.getDietaryInfo().getTargetDate());
         userWithPlanDao.save(objectMapper.convertValue(userWithPlan, UserWithPlanEntity.class));
         return false;
     }
-
 }

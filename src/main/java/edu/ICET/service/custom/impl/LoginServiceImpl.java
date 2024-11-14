@@ -57,6 +57,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean checkUsername(String username) {
+        System.out.println(getAll());
         List<Login> loginList = getAll();
         for (Login login : loginList) {
             return login.getUsername().equalsIgnoreCase(username);

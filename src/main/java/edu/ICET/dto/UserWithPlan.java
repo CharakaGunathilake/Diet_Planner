@@ -16,4 +16,6 @@ public class UserWithPlan {
     private Login login;
     @NotNull(message = "Diet info can't be empty")
     private DietaryInfo dietaryInfo;
+    @NotNull(message = "Diet plan can't be empty")
+    private DietPlan dietPlan;
 }

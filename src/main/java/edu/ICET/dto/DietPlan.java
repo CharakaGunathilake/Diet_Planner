@@ -5,9 +5,8 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -19,11 +18,10 @@ public class DietPlan {
     @Size(min = 2, max = 150, message = "Description should be between 2 and 50 characters")
     private String description;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startDate;
+    private Date startDate;
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endDate;
+    private String endDateString;
+    private Date endDate;
     @NotNull
     private String dietType;
     private Long userId;

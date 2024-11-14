@@ -18,7 +18,4 @@ public class LoginEntity {
     private String username;
     private String password;
     private Date loginDate;
-    @OneToOne(mappedBy = "login")
-    @JoinColumn(name = "detailId", referencedColumnName = "id")
-    private UserWithPlanEntity detailId;
 }

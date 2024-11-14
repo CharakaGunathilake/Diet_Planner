@@ -2,10 +2,12 @@ package edu.ICET.service.custom.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.DietPlan;
+import edu.ICET.dto.DietaryInfo;
 import edu.ICET.entity.DietPlanEntity;
 import edu.ICET.repository.DietPlanDao;
 import edu.ICET.service.custom.DietPlanService;
 import edu.ICET.service.custom.UserService;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DietDietPlanServiceImpl implements DietPlanService {
+public class DietPlanServiceImpl implements DietPlanService {
 
     private final DietPlanDao dietPlanDao;
     private final ObjectMapper objectMapper;
@@ -54,5 +56,11 @@ public class DietDietPlanServiceImpl implements DietPlanService {
             dietPlanList.add(objectMapper.convertValue(dietPlan, DietPlan.class));
         });
         return dietPlanList;
+    }
+
+    @Override
+    public void setPlanDetails(@NotNull(message = "Diet info can't be empty") DietaryInfo dietaryInfo) {
+        DietPlan dietPlan = new DietPlan();
+//        dietPlan.setDescription(di);
     }
 }

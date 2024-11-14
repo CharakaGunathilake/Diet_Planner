@@ -25,6 +25,5 @@ public class UserEntity {
     private String email;
     private boolean status;
     private Date regDate;
-    @OneToOne(mappedBy = "user")
-    private UserWithPlanEntity detailId;
+
 }

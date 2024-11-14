@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.DietaryInfo;
 import edu.ICET.entity.DietaryInfoEntity;
 import edu.ICET.repository.DietaryInfoDao;
+import edu.ICET.service.custom.DietPlanService;
 import edu.ICET.service.custom.DietaryInfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -66,7 +67,6 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
         switch (gender) {
             case "Male":
                 dcr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
-                System.out.println(dcr);
                 return (int) (dcr * getActivityRate(activityRate));
             case "Female":
                 dcr = (10 * weight) + (6.25 * height) - (5 * age) - 161;

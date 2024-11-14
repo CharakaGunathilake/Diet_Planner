@@ -35,7 +35,4 @@ public class DietaryInfoEntity {
     private String cookingHabit;
     private Integer dcr;
     private String bmiStatus;
-    @OneToOne(mappedBy = "dietaryInfo")
-    @JoinColumn(table = "UserPlan",name = "detailId", referencedColumnName = "id")
-    private UserWithPlanEntity detailId;
 }

@@ -10,5 +10,5 @@ import jakarta.validation.Valid;
 
 public interface UserService extends SuperService<User> {
     Long getUserId();
-    boolean saveNewUser(UserWithPlan userWithPlan);
+    boolean saveNewUser(@Valid UserWithPlan userWithPlan);
 }
