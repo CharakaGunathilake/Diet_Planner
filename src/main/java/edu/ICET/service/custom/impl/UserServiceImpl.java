@@ -81,6 +81,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserWithPlan getUserWithPlanBy(Long id){
+        return (objectMapper.convertValue(userWithPlanDao.findById(id),UserWithPlan.class));
+    }
+
+    @Override
     public boolean verifyEmail(String email) {
         return userDao.existsByEmail(email);
     }

@@ -11,6 +11,6 @@ import jakarta.validation.Valid;
 public interface UserService extends SuperService<User> {
     Long getUserId();
     boolean saveNewUser(@Valid UserWithPlan userWithPlan);
-
+    UserWithPlan getUserWithPlanBy(Long id);
     boolean verifyEmail(@Valid String email);
 }

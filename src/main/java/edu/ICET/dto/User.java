@@ -24,7 +24,7 @@ public class User {
     private String gender;
     @NotNull(message = "Birthday Cannot be empty!")
     @Past(message = "Invalid Birthday")
-    private LocalDate birthDay;
+    private Date birthDay;
     @NotNull(message = "Age cannot be empty!")
     @Min(value = 5, message = "Age too low")
     @Max(value = 100, message = "Invalid age")

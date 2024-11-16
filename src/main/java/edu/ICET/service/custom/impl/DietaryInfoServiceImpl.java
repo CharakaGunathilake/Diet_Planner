@@ -76,17 +76,13 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
     }
 
     private Double getActivityRate(String activityRate) {
-        switch (activityRate.toLowerCase()) {
-            case "sedentary (little to no exercise)":
-                return 1.2;
-            case "lightly active (exercise 1-2 times a week)":
-                return 1.375;
-            case "moderately active (exercise 3-5 times a week)":
-                return 1.55;
-            case "very active (intense exercise or physical job)":
-                return 1.725;
-        }
-        return 0.0;
+        return switch (activityRate.toLowerCase()) {
+            case "sedentary (little to no exercise)" -> 1.2;
+            case "lightly active (exercise 1-2 times a week)" -> 1.375;
+            case "moderately active (exercise 3-5 times a week)" -> 1.55;
+            case "very active (intense exercise or physical job)" -> 1.725;
+            default -> 0.0;
+        };
     }
 
     private Double calculateBMI(Double height, Double weight) {

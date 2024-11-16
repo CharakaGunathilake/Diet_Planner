@@ -33,6 +33,7 @@ public class UserController {
         log.info("Received UserDietaryInfo-> {}", userWithPlan.getDietaryInfo());
         return userService.saveNewUser(userWithPlan);
     }
+
     @PostMapping("/add-user")
     public boolean addUser(@Valid @RequestBody User user) {
         log.info("Received User-> {}", user);
@@ -40,8 +41,8 @@ public class UserController {
     }
 
     @GetMapping("/verify-email/{email}")
-    public boolean verifyEmail(@Valid @PathVariable String email){
-        log.info("Requested a verification for the email -> {}",email);
+    public boolean verifyEmail(@Valid @PathVariable String email) {
+        log.info("Requested a verification for the email -> {}", email);
         return userService.verifyEmail(email);
     }
 
@@ -49,6 +50,12 @@ public class UserController {
     public User getUserById(@PathVariable Long id) {
         log.info("Requested User by the Id-> {}", id);
         return userService.search(id);
+    }
+
+    @GetMapping("get-userWithPlan-byId/{id}")
+    public UserWithPlan getUserWithPlanById(@PathVariable Long id) {
+        log.info("Requested User with plan by the id-> {}", id);
+        return userService.getUserWithPlanBy(id);
     }
 
     @PutMapping("/update-user-info")
