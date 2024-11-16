@@ -16,7 +16,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DietaryInfoServiceImpl implements DietaryInfoService {
-
     private final DietaryInfoDao dietaryInfoDao;
     private final ObjectMapper objectMapper;
 
@@ -29,10 +28,10 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
     @Override
     public void setCalculatedData(DietaryInfo dietaryInfo) {
         dietaryInfo.setBmi(calculateBMI(dietaryInfo.getHeight(), dietaryInfo.getWeight()));
+        dietaryInfo.setDcr(calculateDCR(dietaryInfo.getActivityRate(), dietaryInfo.getGender(), dietaryInfo.getWeight(), dietaryInfo.getHeight(), dietaryInfo.getAge()));
         dietaryInfo.setCaloriesNeeded(getCaloriesNeeded(dietaryInfo.getTargetWeight(), dietaryInfo.getWeight()));
         dietaryInfo.setBmiStatus(getBmiStatus(dietaryInfo.getBmi()));
-        dietaryInfo.setDcr(calculateDCR(dietaryInfo.getActivityRate(), dietaryInfo.getGender(), dietaryInfo.getWeight(), dietaryInfo.getHeight(), dietaryInfo.getAge()));
-        dietaryInfo.setTargetDate(calculateTargetDate(dietaryInfo.getTargetDateString()));
+        dietaryInfo.setTargetDate(calculateTargetDate(dietaryInfo.getCaloriesNeeded(),dietaryInfo.getDcr(),dietaryInfo.getTargetDateString()));
     }
 
     @Override
@@ -64,11 +63,11 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
 
     private Integer calculateDCR(String activityRate, String gender, Double weight, Double height, Integer age) {
         double dcr;
-        switch (gender) {
-            case "Male":
+        switch (gender.toLowerCase()) {
+            case "male":
                 dcr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
                 return (int) (dcr * getActivityRate(activityRate));
-            case "Female":
+            case "female":
                 dcr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
                 return (int) (dcr * getActivityRate(activityRate));
             default:
@@ -77,14 +76,14 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
     }
 
     private Double getActivityRate(String activityRate) {
-        switch (activityRate) {
-            case "Sedentary (little to no exercise)":
+        switch (activityRate.toLowerCase()) {
+            case "sedentary (little to no exercise)":
                 return 1.2;
-            case "Lightly active (exercise 1-2 times a week)":
+            case "lightly active (exercise 1-2 times a week)":
                 return 1.375;
-            case "Moderately active (exercise 3-5 times a week)":
+            case "moderately active (exercise 3-5 times a week)":
                 return 1.55;
-            case "Very active (intense exercise or physical job)":
+            case "very active (intense exercise or physical job)":
                 return 1.725;
         }
         return 0.0;
@@ -115,18 +114,14 @@ public class DietaryInfoServiceImpl implements DietaryInfoService {
         return 0;
     }
 
-    Date calculateTargetDate(String targetDate) {
-        switch (targetDate) {
-            case "Within 1 month":
-                return new Date(new Date().getTime() + 30L * 24 * 60 * 60 * 1000);
-            case "Within 3 months":
-                return new Date(new Date().getTime() + 90L * 24 * 60 * 60 * 1000);
-            case "Within 6 months":
-                return new Date(new Date().getTime() + 180L * 24 * 60 * 60 * 1000);
-            case "Within 1 year":
-                return new Date(new Date().getTime() + 365L * 24 * 60 * 60 * 1000);
-            default:
-                return new Date();
-        }
+    Date calculateTargetDate(Integer caloriesNeeded,Integer dcr, String targetDate) {
+        int dateFormula = 24 * 60 * 60 * 1000;
+        return switch (targetDate.toLowerCase()) {
+            case "within 1 month" -> new Date(new Date().getTime() + 30L * dateFormula);
+            case "within 3 months" -> new Date(new Date().getTime() + 90L * dateFormula);
+            case "within 6 months" -> new Date(new Date().getTime() + 180L * dateFormula);
+            case "within 1 year" -> new Date(new Date().getTime() + 365L * dateFormula);
+            default -> new Date(new Date().getTime() + (long) (caloriesNeeded/dcr) * dateFormula);
+        };
     }
 }

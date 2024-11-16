@@ -17,12 +17,8 @@ public class DietPlan {
     private String name;
     @Size(min = 2, max = 150, message = "Description should be between 2 and 50 characters")
     private String description;
-    @NotNull
     private Date startDate;
-    @NotNull
-    private String endDateString;
     private Date endDate;
-    @NotNull
     private String dietType;
     private Long userId;
 }

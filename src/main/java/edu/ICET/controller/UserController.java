@@ -39,6 +39,12 @@ public class UserController {
         return userService.save(user);
     }
 
+    @GetMapping("/verify-email/{email}")
+    public boolean verifyEmail(@Valid @PathVariable String email){
+        log.info("Requested a verification for the email -> {}",email);
+        return userService.verifyEmail(email);
+    }
+
     @GetMapping("/get-user-byId/{id}")
     public User getUserById(@PathVariable Long id) {
         log.info("Requested User by the Id-> {}", id);
