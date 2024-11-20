@@ -8,21 +8,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MealInfo {
     private Long id;
-    @NotNull
-    @Pattern(regexp = "^(Snack|BreakFast|Lunch|Dinner)$", message = "Invalid meal name")
-    private String name;
-    @Size(min = 2, max = 150, message = "Description should be between 2 and 50 characters")
-    private String description;
-    @NotNull
-    private Integer calories;
-    @NotNull
-    private LocalTime time;
-    @NotNull
     private Long UserId;
+    @NotNull
+    private Long mealId;
+    @NotNull
+    private String recipeName;
+    @NotNull
+    private String mealName;
+    private String cuisines;
+    private Integer calories;
+    private String imageLink;
+    @NotNull
+    private String mealTime;
+    private Date timeCompleted;
+    private Boolean completedMeal;
 }

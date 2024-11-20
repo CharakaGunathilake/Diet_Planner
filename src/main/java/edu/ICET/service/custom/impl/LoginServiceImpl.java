@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.Login;
 import edu.ICET.entity.LoginEntity;
 import edu.ICET.repository.LoginDao;
+import edu.ICET.repository.UserWithPlanDao;
 import edu.ICET.service.custom.LoginService;
 import edu.ICET.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class LoginServiceImpl implements LoginService {
 
     private final LoginDao loginDao;
     private final ObjectMapper objectMapper;
-
+    private final UserWithPlanDao userWithPlanDao;
     @Override
     public boolean save(Login login) {
         loginDao.save(objectMapper.convertValue(login, LoginEntity.class));
@@ -57,7 +58,6 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean checkUsername(String username) {
-        System.out.println(getAll());
         List<Login> loginList = getAll();
         for (Login login : loginList) {
             return login.getUsername().equalsIgnoreCase(username);
@@ -65,7 +65,13 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Login searchByUsername(String username) {
-        return objectMapper.convertValue(loginDao.findByUsername(username),Login.class);
+    public Long searchByUsername(String username, String password) {
+        LoginEntity loginEntity = loginDao.findByUsername(username);
+        if(loginEntity != null) {
+            if (username.equals(loginEntity.getUsername()) && password.equals(loginEntity.getPassword())) {
+                return userWithPlanDao.findByloginId(loginEntity.getId()).getId();
+            }
+        }
+        return null;
     }
 }

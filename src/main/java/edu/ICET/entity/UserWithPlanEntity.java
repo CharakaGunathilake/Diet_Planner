@@ -16,10 +16,10 @@ public class UserWithPlanEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(targetEntity = UserEntity.class,cascade = CascadeType.ALL) // or CascadeType.ALL
+    @OneToOne(targetEntity = UserEntity.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
-    @OneToOne(targetEntity = LoginEntity.class,cascade = CascadeType.ALL) // or CascadeType.ALL
+    @OneToOne(targetEntity = LoginEntity.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "login_id", referencedColumnName = "id")
     private LoginEntity login;
     @OneToOne(targetEntity = DietaryInfoEntity.class,cascade = {CascadeType.ALL,CascadeType.REMOVE})

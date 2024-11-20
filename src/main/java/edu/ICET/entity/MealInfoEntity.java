@@ -4,11 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +22,15 @@ public class MealInfoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
+    private Long UserId;
+    private Long mealId;
+    private String recipeName;
+    private String mealName;
+    private String cuisines;
     private Integer calories;
-    private LocalTime time;
-    private Long userId;
+    private String imageLink;
+    private String mealTime;
+    private Date timeCompleted;
+    private Boolean completedMeal;
+
 }

@@ -58,7 +58,7 @@ public class UserController {
         return userService.getUserWithPlanBy(id);
     }
 
-    @PutMapping("/update-user-info")
+    @PutMapping("/update-user")
     public boolean updateUser(@Valid @RequestBody User user) {
         log.info("Updated User by the Id= {} as: {}", user.getId(), user);
         return userService.update(user);

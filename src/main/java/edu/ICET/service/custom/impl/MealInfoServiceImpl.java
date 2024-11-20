@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -23,7 +24,7 @@ public class MealInfoServiceImpl implements MealInfoService {
     @Override
     public boolean save(MealInfo mealInfo) {
         mealInfoDao.save(objectMapper.convertValue(mealInfo, MealInfoEntity.class));
-        return mealInfoDao.existsById(mealInfo.getId());
+        return mealInfoDao.equals(mealInfo);
     }
 
     @Override
@@ -51,5 +52,28 @@ public class MealInfoServiceImpl implements MealInfoService {
             mealInfoList.add(objectMapper.convertValue(mealInfoEntity, MealInfo.class));
         });
         return mealInfoList;
+    }
+
+    @Override
+    public boolean setMealCompleted(Boolean status, Long userId, Long mealId, Date dateCompleted){
+        boolean bool = false;
+        for(MealInfo mealInfo : getAllByUserId(userId)) {
+            if(mealInfo.getMealId().equals(mealId)){
+                mealInfo.setTimeCompleted(dateCompleted);
+                mealInfo.setCompletedMeal(status);
+                bool = true;
+            }
+        }return bool;
+    }
+
+    @Override
+    public List<MealInfo> getAllByUserId(Long id){
+        List<MealInfo> listByUserId = new ArrayList<>();
+        getAll().forEach(mealInfo -> {
+            if(mealInfo.getUserId().equals(id)){
+                listByUserId.add(mealInfo);
+            }
+        });
+        return listByUserId;
     }
 }

@@ -28,10 +28,10 @@ public class LoginController {
         return loginService.save(login);
     }
 
-    @GetMapping("/get-login-byId/{username}")
-    public Login getLoginByUsername(@PathVariable String username){
-        log.info("Requested Login by the Username-> {}", username);
-        return loginService.searchByUsername(username);
+    @GetMapping("/get-login-byId/{username}/{password}")
+    public Long getLoginByUsername(@PathVariable("username") String username, @PathVariable("password") String password){
+        log.info("Requested Validation by the username-> {}", username);
+        return loginService.searchByUsername(username,password);
     }
 
     @PutMapping("/update-login-info")
