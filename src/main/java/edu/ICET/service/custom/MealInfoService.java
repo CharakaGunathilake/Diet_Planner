@@ -7,6 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface MealInfoService extends SuperService<MealInfo> {
-    boolean setMealCompleted(Boolean status, Long userId, Long mealId, Date completedDate);
-    List<MealInfo> getAllByUserId(Long id);
+    boolean setMealCompleted(Boolean status, Long userId, Long mealId, String completedDate);
+    List<MealInfo> getAllByUserId(Long id,String date);
 }

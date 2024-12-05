@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -22,6 +23,6 @@ public class Login {
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{6,}$", message = "Password too weak!")
     private String password;
     @NotNull
-    private Date loginDate;
+    private Timestamp loginDate;
     private Long userId;
 }

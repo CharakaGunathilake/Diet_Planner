@@ -49,14 +49,19 @@ public class MealInfoController {
         return mealInfoService.delete(id);
     }
 
-    @GetMapping("/getAllMealInfo-byUserId/{id}")
-    public List<MealInfo> getAllByUserId(@PathVariable Long id) {
-        log.info("Requested All MealInfo by the userId-> {}", id);
-        return mealInfoService.getAllByUserId(id);
+    @GetMapping("/getAllMealInfo-byUserId/{id}/{date}")
+    public List<MealInfo> getAllByUserId(@PathVariable Long id,@PathVariable String date) {
+        log.info("Requested All MealInfo by the userId-> {} and date-> {}", id,date);
+        return mealInfoService.getAllByUserId(id,date);
+    }
+
+    @GetMapping("/getAll")
+    public List<MealInfo> getAll(){
+        return mealInfoService.getAll();
     }
 
     @PutMapping("/setMealCompleted/{status}/{userId}/{mealId}/{dateCompleted}")
-    public boolean setMealCompleted(@PathVariable("status") Boolean status, @PathVariable("userId") Long userId, @PathVariable("mealId") Long mealId, @PathVariable("dateCompleted") Date dateCompleted) {
+    public boolean setMealCompleted(@PathVariable("status") Boolean status, @PathVariable("userId") Long userId, @PathVariable("mealId") Long mealId, @PathVariable("dateCompleted") String dateCompleted) {
         log.info("Updated meal by the id {} as {} by userId {}", mealId, status, userId);
         return mealInfoService.setMealCompleted(status, userId, mealId, dateCompleted);
     }

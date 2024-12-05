@@ -2,13 +2,18 @@ package edu.ICET.service.custom.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.ICET.dto.Login;
+import edu.ICET.dto.UserPrincipal;
 import edu.ICET.entity.LoginEntity;
 import edu.ICET.repository.LoginDao;
-import edu.ICET.repository.UserWithPlanDao;
 import edu.ICET.service.custom.LoginService;
-import edu.ICET.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,12 +25,32 @@ import java.util.List;
 public class LoginServiceImpl implements LoginService {
 
     private final LoginDao loginDao;
+    private final JWTService jwtService;
     private final ObjectMapper objectMapper;
-    private final UserWithPlanDao userWithPlanDao;
+    private final AuthenticationManager authenticationManager;
+
+
     @Override
     public boolean save(Login login) {
-        loginDao.save(objectMapper.convertValue(login, LoginEntity.class));
-        return loginDao.equals(login);
+        try {
+            login.setPassword(new BCryptPasswordEncoder(12).encode(login.getPassword()));
+            loginDao.save(objectMapper.convertValue(login, LoginEntity.class));
+            return loginDao.existsByUsername(login.getUsername());
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public String verify(Login login) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    login.getUsername(), login.getPassword()
+            ));
+            return jwtService.generateToken(login.getUsername());
+        } catch (AuthenticationException e) {
+            return "Failure";
+        }
     }
 
     @Override
@@ -61,17 +86,7 @@ public class LoginServiceImpl implements LoginService {
         List<Login> loginList = getAll();
         for (Login login : loginList) {
             return login.getUsername().equalsIgnoreCase(username);
-        }return false;
-    }
-
-    @Override
-    public Long searchByUsername(String username, String password) {
-        LoginEntity loginEntity = loginDao.findByUsername(username);
-        if(loginEntity != null) {
-            if (username.equals(loginEntity.getUsername()) && password.equals(loginEntity.getPassword())) {
-                return userWithPlanDao.findByloginId(loginEntity.getId()).getId();
-            }
         }
-        return null;
+        return false;
     }
 }

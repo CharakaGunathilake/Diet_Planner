@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -22,16 +23,23 @@ import java.util.Map;
 public class LoginController {
     private final LoginService loginService;
 
+    @PostMapping
+    public ResponseEntity<Map<String,String>> login(@RequestBody Login login) {
+        Map<String,String> response = new HashMap<>();
+        log.info("Login requested by the user-> {}", login);
+        String token = loginService.verify(login);
+        if (!token.equals("Failure")) {
+            response.put("jwt", token);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        }
+        response.put("message","unauthorized login");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+    }
+
     @PostMapping("/add-login")
     public boolean addLogin(@Valid @RequestBody Login login){
         log.info("Received Login-> {}", login);
         return loginService.save(login);
-    }
-
-    @GetMapping("/get-login-byId/{username}/{password}")
-    public Long getLoginByUsername(@PathVariable("username") String username, @PathVariable("password") String password){
-        log.info("Requested Validation by the username-> {}", username);
-        return loginService.searchByUsername(username,password);
     }
 
     @PutMapping("/update-login-info")

@@ -16,6 +16,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.orm.hibernate5.SpringSessionContext;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -89,4 +91,5 @@ public class UserServiceImpl implements UserService {
     public boolean verifyEmail(String email) {
         return userDao.existsByEmail(email);
     }
+
 }

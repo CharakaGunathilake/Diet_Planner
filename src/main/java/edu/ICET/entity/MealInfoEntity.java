@@ -30,7 +30,7 @@ public class MealInfoEntity {
     private Integer calories;
     private String imageLink;
     private String mealTime;
-    private Date timeCompleted;
+    private String timeCompleted;
+    private String mealDate;
     private Boolean completedMeal;
-
 }

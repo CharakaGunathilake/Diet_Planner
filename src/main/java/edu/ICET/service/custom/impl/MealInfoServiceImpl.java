@@ -55,25 +55,27 @@ public class MealInfoServiceImpl implements MealInfoService {
     }
 
     @Override
-    public boolean setMealCompleted(Boolean status, Long userId, Long mealId, Date dateCompleted){
+    public boolean setMealCompleted(Boolean status, Long userId, Long mealId, String dateCompleted) {
         boolean bool = false;
-        for(MealInfo mealInfo : getAllByUserId(userId)) {
-            if(mealInfo.getMealId().equals(mealId)){
+        for (MealInfo mealInfo : getAllByUserId(userId, dateCompleted)) {
+            if (mealInfo.getMealId().equals(mealId)) {
                 mealInfo.setTimeCompleted(dateCompleted);
                 mealInfo.setCompletedMeal(status);
                 bool = true;
             }
-        }return bool;
+        }
+        return bool;
     }
 
     @Override
-    public List<MealInfo> getAllByUserId(Long id){
+    public List<MealInfo> getAllByUserId(Long id, String date) {
         List<MealInfo> listByUserId = new ArrayList<>();
         getAll().forEach(mealInfo -> {
-            if(mealInfo.getUserId().equals(id)){
+            if (mealInfo.getUserId().equals(id) && mealInfo.getMealDate().equals(date)) {
                 listByUserId.add(mealInfo);
             }
         });
+        System.out.println(listByUserId + " == " + id + " // " + date);
         return listByUserId;
     }
 }

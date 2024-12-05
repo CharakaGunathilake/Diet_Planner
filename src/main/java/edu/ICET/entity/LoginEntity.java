@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -17,5 +18,5 @@ public class LoginEntity {
     private Long id;
     private String username;
     private String password;
-    private Date loginDate;
+    private Timestamp loginDate;
 }

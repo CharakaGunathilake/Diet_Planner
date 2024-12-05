@@ -27,6 +27,7 @@ public class MealInfo {
     private String imageLink;
     @NotNull
     private String mealTime;
-    private Date timeCompleted;
+    private String timeCompleted;
+    private String mealDate;
     private Boolean completedMeal;
 }

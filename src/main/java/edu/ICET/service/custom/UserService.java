@@ -7,6 +7,7 @@ import edu.ICET.dto.UserWithPlan;
 import edu.ICET.entity.UserWithPlanEntity;
 import edu.ICET.service.SuperService;
 import jakarta.validation.Valid;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends SuperService<User> {
     Long getUserId();
