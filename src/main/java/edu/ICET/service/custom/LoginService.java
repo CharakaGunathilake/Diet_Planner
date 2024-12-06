@@ -4,7 +4,9 @@ import edu.ICET.dto.Login;
 import edu.ICET.service.SuperService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.Map;
+
 public interface LoginService extends SuperService<Login>{
     boolean checkUsername(String username);
-    String verify(Login login);
+    Map<String,String> verify(Login login);
 }

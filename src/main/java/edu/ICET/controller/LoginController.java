@@ -24,39 +24,38 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping
-    public ResponseEntity<Map<String,String>> login(@RequestBody Login login) {
-        Map<String,String> response = new HashMap<>();
+    public ResponseEntity<Map<String, String>> login(@RequestBody Login login) {
         log.info("Login requested by the user-> {}", login);
-        String token = loginService.verify(login);
-        if (!token.equals("Failure")) {
-            response.put("jwt", token);
+        Map<String, String> response = loginService.verify(login);
+        if (response.containsKey("jwt")) {
+            System.out.println(response);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-        response.put("message","unauthorized login");
+        response.put("message", "unauthorized login");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
     }
 
     @PostMapping("/add-login")
-    public boolean addLogin(@Valid @RequestBody Login login){
+    public boolean addLogin(@Valid @RequestBody Login login) {
         log.info("Received Login-> {}", login);
         return loginService.save(login);
     }
 
     @PutMapping("/update-login-info")
-    public boolean updateLogin(@Valid @RequestBody Login login){
+    public boolean updateLogin(@Valid @RequestBody Login login) {
         log.info("Updated Login by the Id = {} as: {}", login.getId(), login);
         return loginService.update(login);
     }
 
     @DeleteMapping("/delete-login-byId/{id}")
-    public boolean deleteLoginById(@PathVariable Long id){
+    public boolean deleteLoginById(@PathVariable Long id) {
         log.info("Deleted Login by the Id-> {}", id);
         return loginService.delete(id);
     }
 
-    @GetMapping("/check-username/{username}")
-    public  boolean checkUsername(@PathVariable String username){
-        log.info("Requested availability of username-> {}",username);
+    @GetMapping("/validate")
+    public boolean checkUsername(@RequestParam String username) {
+        log.info("Requested availability of username-> {}", username);
         return loginService.checkUsername(username);
     }
 

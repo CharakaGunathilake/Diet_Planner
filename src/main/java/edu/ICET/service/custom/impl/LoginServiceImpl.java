@@ -17,7 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -42,14 +44,18 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public String verify(Login login) {
+    public Map<String, String> verify(Login login) {
+        Map<String, String> response = new HashMap<>();
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     login.getUsername(), login.getPassword()
             ));
-            return jwtService.generateToken(login.getUsername());
+            response.put("jwt", jwtService.generateToken(login.getUsername()));
+            response.put("loginId", loginDao.findByUsername(login.getUsername()).getId().toString());
+            return response;
         } catch (AuthenticationException e) {
-            return "Failure";
+            response.put("message", "Unauthorized Login");
+            return response;
         }
     }
 

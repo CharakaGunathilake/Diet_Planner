@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,11 +56,11 @@ public class MealInfoServiceImpl implements MealInfoService {
     }
 
     @Override
-    public boolean setMealCompleted(Boolean status, Long userId, Long mealId, String dateCompleted) {
+    public boolean setMealCompleted(Boolean status, Long userId, String mealName, String timeCompleted) {
         boolean bool = false;
-        for (MealInfo mealInfo : getAllByUserId(userId, dateCompleted)) {
-            if (mealInfo.getMealId().equals(mealId)) {
-                mealInfo.setTimeCompleted(dateCompleted);
+        for (MealInfo mealInfo : getAllByUserId(userId, String.valueOf(LocalDate.now()))) {
+            if (mealInfo.getMealName().equals(mealName)) {
+                mealInfo.setTimeCompleted(timeCompleted);
                 mealInfo.setCompletedMeal(status);
                 bool = true;
             }

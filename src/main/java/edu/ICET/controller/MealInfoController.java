@@ -49,21 +49,25 @@ public class MealInfoController {
         return mealInfoService.delete(id);
     }
 
-    @GetMapping("/getAllMealInfo-byUserId/{id}/{date}")
-    public List<MealInfo> getAllByUserId(@PathVariable Long id,@PathVariable String date) {
-        log.info("Requested All MealInfo by the userId-> {} and date-> {}", id,date);
-        return mealInfoService.getAllByUserId(id,date);
+    @GetMapping("/mealsById")
+    public List<MealInfo> getAllByUserId(@RequestParam Long id, @RequestParam String date) {
+        log.info("Requested All MealInfo by the userId-> {} and date-> {}", id, date);
+        return mealInfoService.getAllByUserId(id, date);
     }
 
     @GetMapping("/getAll")
-    public List<MealInfo> getAll(){
+    public List<MealInfo> getAll() {
         return mealInfoService.getAll();
     }
 
-    @PutMapping("/setMealCompleted/{status}/{userId}/{mealId}/{dateCompleted}")
-    public boolean setMealCompleted(@PathVariable("status") Boolean status, @PathVariable("userId") Long userId, @PathVariable("mealId") Long mealId, @PathVariable("dateCompleted") String dateCompleted) {
-        log.info("Updated meal by the id {} as {} by userId {}", mealId, status, userId);
-        return mealInfoService.setMealCompleted(status, userId, mealId, dateCompleted);
+    @PutMapping("/mealCompleted")
+    public boolean setMealCompleted(
+            @RequestParam Boolean status,
+            @RequestParam Long userId,
+            @RequestParam String mealName,
+            @RequestParam String timeCompleted) {
+        log.info("Updated meal by the id {} as {} by userId {}", mealName, status, userId);
+        return mealInfoService.setMealCompleted(status, userId, mealName, timeCompleted);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

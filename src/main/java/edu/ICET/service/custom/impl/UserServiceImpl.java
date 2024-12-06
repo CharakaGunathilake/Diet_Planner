@@ -77,14 +77,14 @@ public class UserServiceImpl implements UserService {
         dietaryInfoService.setCalculatedData(dietaryInfo);
         userWithPlan.getDietPlan().setStartDate(userWithPlan.getUser().getRegDate());
         userWithPlan.getDietPlan().setEndDate(dietaryInfo.getTargetDate());
-        userWithPlan.getDietPlan().setDietType(dietaryInfo.getDietPreference().equals("none") ? "GeneralDiet":dietaryInfo.getDietPreference());
+        userWithPlan.getDietPlan().setDietType(dietaryInfo.getDietPreference().equals("none") ? "General Diet":dietaryInfo.getDietPreference());
         userWithPlanDao.save(objectMapper.convertValue(userWithPlan, UserWithPlanEntity.class));
         return false;
     }
 
     @Override
     public UserWithPlan getUserWithPlanBy(Long id){
-        return (objectMapper.convertValue(userWithPlanDao.findById(id),UserWithPlan.class));
+        return (objectMapper.convertValue(userWithPlanDao.findByloginId(id),UserWithPlan.class));
     }
 
     @Override

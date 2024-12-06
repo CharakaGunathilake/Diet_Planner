@@ -25,7 +25,7 @@ import java.util.Map;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/add-user-with-plan")
+    @PostMapping("/register-with-plan")
     public boolean addUserWithPlan(@Valid @RequestBody UserWithPlan userWithPlan) {
         log.info("Received UserWithPlan-> {}", userWithPlan.getUser());
         log.info("Received UserLogin-> {}", userWithPlan.getLogin());
@@ -34,14 +34,14 @@ public class UserController {
         return userService.saveNewUser(userWithPlan);
     }
 
-    @PostMapping("/add-user")
+    @PostMapping("/register")
     public boolean addUser(@Valid @RequestBody User user) {
         log.info("Received User-> {}", user);
         return userService.save(user);
     }
 
-    @GetMapping("/verify-email/{email}")
-    public boolean verifyEmail(@Valid @PathVariable String email) {
+    @GetMapping("/validate")
+    public boolean verifyEmail(@Valid @RequestParam String email) {
         log.info("Requested a verification for the email -> {}", email);
         return userService.verifyEmail(email);
     }
@@ -52,7 +52,7 @@ public class UserController {
         return userService.search(id);
     }
 
-    @GetMapping("get-userWithPlan-byId/{id}")
+    @GetMapping("byPlanId/{id}")
     public UserWithPlan getUserWithPlanById(@PathVariable Long id) {
         log.info("Requested User with plan by the id-> {}", id);
         return userService.getUserWithPlanBy(id);
