@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserWithPlan getUserWithPlanBy(Long id){
-        return (objectMapper.convertValue(userWithPlanDao.findByloginId(id),UserWithPlan.class));
+        return (objectMapper.convertValue(userWithPlanDao.findByLoginId(id),UserWithPlan.class));
     }
 
     @Override

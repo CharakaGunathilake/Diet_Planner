@@ -5,5 +5,5 @@ import edu.ICET.entity.UserWithPlanEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserWithPlanDao extends JpaRepository<UserWithPlanEntity,Long> {
-    UserWithPlanEntity findByloginId(Long id);
+    UserWithPlanEntity findByLoginId(Long id);
 }
