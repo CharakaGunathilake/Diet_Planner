@@ -8,16 +8,14 @@ import edu.ICET.repository.DietaryInfoDao;
 import edu.ICET.repository.LoginDao;
 import edu.ICET.repository.UserDao;
 import edu.ICET.repository.UserWithPlanDao;
-import edu.ICET.service.custom.DietPlanService;
-import edu.ICET.service.custom.DietaryInfoService;
-import edu.ICET.service.custom.LoginService;
-import edu.ICET.service.custom.UserService;
+import edu.ICET.service.custom.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.orm.hibernate5.SpringSessionContext;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,9 +27,10 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
+    private final ObjectMapper objectMapper;
+    private final MealInfoService mealInfoService;
     private final UserWithPlanDao userWithPlanDao;
     private final DietaryInfoService dietaryInfoService;
-    private final ObjectMapper objectMapper;
 
     @Override
     public boolean save(User user) {
@@ -74,10 +73,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean saveNewUser(UserWithPlan userWithPlan) {
         DietaryInfo dietaryInfo = userWithPlan.getDietaryInfo();
+        DietPlan dietPlan = userWithPlan.getDietPlan();
+        Login login = userWithPlan.getLogin();
+        login.setPassword(new BCryptPasswordEncoder(12).encode(login.getPassword()));
         dietaryInfoService.setCalculatedData(dietaryInfo);
-        userWithPlan.getDietPlan().setStartDate(userWithPlan.getUser().getRegDate());
-        userWithPlan.getDietPlan().setEndDate(dietaryInfo.getTargetDate());
-        userWithPlan.getDietPlan().setDietType(dietaryInfo.getDietPreference().equals("none") ? "General Diet":dietaryInfo.getDietPreference());
+        dietPlan.setStartDate(userWithPlan.getUser().getRegDate());
+        dietPlan.setEndDate(dietaryInfo.getTargetDate());
+        dietPlan.setDietType(dietaryInfo.getDietPreference().equals("none") ? "General Diet":dietaryInfo.getDietPreference());
+        mealInfoService.addMealsForTheDay(dietaryInfo.getMealPlan());
         userWithPlanDao.save(objectMapper.convertValue(userWithPlan, UserWithPlanEntity.class));
         return false;
     }

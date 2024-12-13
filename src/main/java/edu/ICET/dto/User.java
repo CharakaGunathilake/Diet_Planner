@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -45,5 +46,5 @@ public class User {
     @Pattern(regexp = "^(true|false)$", message = "Status must be either 'true' or 'false'")
     private String status;
     @NotNull
-    private Date regDate;
+    private Timestamp regDate;
 }

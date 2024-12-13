@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                 .authorizeHttpRequests(request -> request
                         .requestMatchers(
+                                "quiz/getAll",
                                 "/user/register-with-plan",
                                 "/login/validate",
                                 "/user/validate",

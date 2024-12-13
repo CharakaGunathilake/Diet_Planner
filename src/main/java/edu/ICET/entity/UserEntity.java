@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -24,6 +25,6 @@ public class UserEntity {
     private Double weight;
     private String email;
     private boolean status;
-    private Date regDate;
+    private Timestamp regDate;
 
 }
